@@ -1,0 +1,291 @@
+
+;====== TEST RUN #1 =======================================================================================================================================================
+
+This project is programmed by Sina Amini 
+This software is running on a Lenovo Y500 with processor Intel core i7-3630QM running at 3.00GHz. 
+
+This program will compute e^x for two values of x.
+Vector processing will be used to compute both results concurrently.
+
+Please enter two values for exponents and press enter: 1.0 2.0
+You entered 0x3ff0000000000000 and 0x4000000000000000
+Enter an integer for epsilon: 15
+
+The Taylor series algorithm has begun. Please be patient. 
+
+The algorithm has completed successfully. The computed values are these. 
+exp(1.00000000)  =  2.718282308762356436 
+exp(2.00000000)  =  7.389054566832343518 
+
+The number of terms in the Taylor series is 8.008094
+
+The clock before the algorithm began was 4000431992272 
+The clock when the algorithm ended was 4000432534360 
+
+The run time of the algorithm alone was
+542088 tics = 180696 ns = 0.000180696 seconds.
+
+This program will now return the number of tics to the driver. Enjoy your exponents. 
+The driver received this number: 542088. Have a nice X86 day.
+
+;====== TEST RUN #2 =======================================================================================================================================================
+
+This project is programmed by Sina Amini 
+This software is running on a Lenovo Y500 with processor Intel core i7-3630QM running at 3.00GHz. 
+
+This program will compute e^x for two values of x.
+Vector processing will be used to compute both results concurrently.
+
+Please enter two values for exponents and press enter: 2.0 6.2 
+You entered 0x4000000000000000 and 0x4018cccccccccccd
+Enter an integer for epsilon: 600
+
+The Taylor series algorithm has begun. Please be patient. 
+
+The algorithm has completed successfully. The computed values are these. 
+exp(2.00000000)  =  7.389056098930648631 
+exp(6.20000000)  =  492.749041093256323620 
+
+The number of terms in the Taylor series is 130.000000
+
+The clock before the algorithm began was 4297266977392 
+The clock when the algorithm ended was 4297267163824 
+
+The run time of the algorithm alone was
+186432 tics = 62144 ns = 0.000062144 seconds.
+
+This program will now return the number of tics to the driver. Enjoy your exponents. 
+The driver received this number: 186432. Have a nice X86 day.
+
+;====== TEST RUN #3 =======================================================================================================================================================
+
+This project is programmed by Sina Amini 
+This software is running on a Lenovo Y500 with processor Intel core i7-3630QM running at 3.00GHz. 
+
+This program will compute e^x for two values of x.
+Vector processing will be used to compute both results concurrently.
+
+Please enter two values for exponents and press enter: -0.5 -2.0
+You entered 0xbfe0000000000000 and 0xc000000000000000
+Enter an integer for epsilon: 100
+
+The Taylor series algorithm has begun. Please be patient. 
+
+The algorithm has completed successfully. The computed values are these. 
+exp(-0.50000000)  =  0.606530659712633313 
+exp(-2.00000000)  =  0.135335283236612758 
+
+The number of terms in the Taylor series is 24.000000
+
+The clock before the algorithm began was 4454909920616 
+The clock when the algorithm ended was 4454910146752 
+
+The run time of the algorithm alone was
+226136 tics = 75378 ns = 0.000075378 seconds.
+
+This program will now return the number of tics to the driver. Enjoy your exponents. 
+The driver received this number: 226136. Have a nice X86 day.
+
+;====== TEST RUN #4 =======================================================================================================================================================
+
+This project is programmed by Sina Amini 
+This software is running on a Lenovo Y500 with processor Intel core i7-3630QM running at 3.00GHz. 
+
+This program will compute e^x for two values of x.
+Vector processing will be used to compute both results concurrently.
+
+Please enter two values for exponents and press enter: -1.0 -9.0
+You entered 0xbff0000000000000 and 0xc022000000000000
+Enter an integer for epsilon: 1022
+
+The Taylor series algorithm has begun. Please be patient. 
+
+The algorithm has completed successfully. The computed values are these. 
+exp(-1.00000000)  =  0.367879441171442445 
+exp(-9.00000000)  =  0.000123409804068885 
+
+The number of terms in the Taylor series is 171.000000
+
+The clock before the algorithm began was 4550564165400 
+The clock when the algorithm ended was 4550564360576 
+
+The run time of the algorithm alone was
+195176 tics = 65058 ns = 0.000065058 seconds.
+
+This program will now return the number of tics to the driver. Enjoy your exponents. 
+The driver received this number: 195176. Have a nice X86 day.
+
+;====== TEST RUN #5 =======================================================================================================================================================
+
+This project is programmed by Sina Amini 
+This software is running on a Lenovo Y500 with processor Intel core i7-3630QM running at 3.00GHz. 
+
+This program will compute e^x for two values of x.
+Vector processing will be used to compute both results concurrently.
+
+Please enter two values for exponents and press enter: 100.0 -100.0 
+You entered 0x4059000000000000 and 0xc059000000000000
+Enter an integer for epsilon: 50
+
+The Taylor series algorithm has begun. Please be patient. 
+
+The algorithm has completed successfully. The computed values are these. 
+exp(100.00000000)  =  26881171418161336287212771869878505168699392.000000000000000000 
+exp(-100.00000000)  =  -29137556468915325567500288.000000000000000000  
+
+The number of terms in the Taylor series is 302.000000
+
+The clock before the algorithm began was 4624337516872 
+The clock when the algorithm ended was 4624337789696 
+
+The run time of the algorithm alone was
+272824 tics = 90941 ns = 0.000090941 seconds.
+
+This program will now return the number of tics to the driver. Enjoy your exponents. 
+The driver received this number: 272824. Have a nice X86 day.
+
+;====== TEST RUN #6 =======================================================================================================================================================
+
+This project is programmed by Sina Amini 
+This software is running on a Lenovo Y500 with processor Intel core i7-3630QM running at 3.00GHz. 
+
+This program will compute e^x for two values of x.
+Vector processing will be used to compute both results concurrently.
+
+Please enter two values for exponents and press enter: 500.0 501.0
+You entered 0x407f400000000000 and 0x407f500000000000
+Enter an integer for epsilon: 200
+
+The Taylor series algorithm has begun. Please be patient. 
+
+The algorithm has completed successfully. The computed values are these. 
+exp(500.00000000)  =  140359221785283579899295152468378221104605066011067129802251993320455920324260256496909953038784032421984427.000000000000000000 
+exp(500.10000000)  =  155120930000828879536876320764329913269440251475408510542833680038253164969697406754503528678723581781556604.000000000000000000 
+
+
+The number of terms in the Taylor series is 1488.000000
+
+The clock before the algorithm began was 4765163128176 
+The clock when the algorithm ended was 4765163620536 
+
+The run time of the algorithm alone was
+492360 tics = 164120 ns = 0.000164120 seconds.
+
+This program will now return the number of tics to the driver. Enjoy your exponents. 
+The driver received this number: 492360. Have a nice X86 day.
+
+;====== TEST RUN #7 =======================================================================================================================================================
+
+This project is programmed by Sina Amini 
+This software is running on a Lenovo Y500 with processor Intel core i7-3630QM running at 3.00GHz. 
+
+This program will compute e^x for two values of x.
+Vector processing will be used to compute both results concurrently.
+
+Please enter two values for exponents and press enter: 707.0 -202.
+You entered 0x4086180000000000 and 0xc069400000000000
+Enter an integer for epsilon: 900
+
+The Taylor series algorithm has begun. Please be patient. 
+
+The algorithm has completed successfully. The computed values are these. 
+exp(707.00000000)  =  111224050156343345471295208033892048807248438051846039327491931839739289759845.000000000000000000 
+exp(-202.00000000)  =  -624830486692352440387875629475248156736086688799326256143329950433280.000000000000000000 
+
+The number of terms in the Taylor series is 2470.000000
+
+The clock before the algorithm began was 4886731634936 
+The clock when the algorithm ended was 4886732234112 
+
+The run time of the algorithm alone was
+599176 tics = 199725 ns = 0.000199725 seconds.
+
+This program will now return the number of tics to the driver. Enjoy your exponents. 
+The driver received this number: 599176. Have a nice X86 day.
+
+;====== TEST RUN #8 =======================================================================================================================================================
+
+This project is programmed by Sina Amini 
+This software is running on a Lenovo Y500 with processor Intel core i7-3630QM running at 3.00GHz. 
+
+This program will compute e^x for two values of x.
+Vector processing will be used to compute both results concurrently.
+
+Please enter two values for exponents and press enter: 725.0 -0.005
+You entered 0x4086a80000000000 and 0xbf747ae147ae147b
+Enter an integer for epsilon: 125
+
+The Taylor series algorithm has begun. Please be patient. 
+
+The algorithm has completed successfully. The computed values are these. 
+exp(725.00000000)  =  148413.159102576543091 
+exp(-0.00500000)  =  0.000000000000000000 
+
+The number of terms in the Taylor series is 58.000000
+
+The clock before the algorithm began was 6837719483840 
+The clock when the algorithm ended was 6837719728056 
+
+The run time of the algorithm alone was
+244216 tics = 81405 ns = 0.000081405 seconds.
+
+This program will now return the number of tics to the driver. Enjoy your exponents. 
+The driver received this number: 244216. Have a nice X86 day.
+
+;====== TEST RUN #9 =======================================================================================================================================================
+
+This project is programmed by Sina Amini 
+This software is running on a Lenovo Y500 with processor Intel core i7-3630QM running at 3.00GHz. 
+
+This program will compute e^x for two values of x.
+Vector processing will be used to compute both results concurrently.
+
+Please enter two values for exponents and press enter: -.0000001 799.0
+You entered 0xbe7ad7f29abcaf48 and 0x4088f80000000000
+Enter an integer for epsilon: 35
+
+The Taylor series algorithm has begun. Please be patient. 
+
+The algorithm has completed successfully. The computed values are these. 
+exp(-0.00000010)  =  0.999999900000005049 
+exp(799.00000000)  =  0.000000000029103830 
+
+The number of terms in the Taylor series is 2.000000
+
+The clock before the algorithm began was 7052653839944 
+The clock when the algorithm ended was 7052654044200 
+
+The run time of the algorithm alone was
+204256 tics = 68085 ns = 0.000068085 seconds.
+
+This program will now return the number of tics to the driver. Enjoy your exponents. 
+The driver received this number: 204256. Have a nice X86 day.
+
+;====== TEST RUN #10 ======================================================================================================================================================
+
+This project is programmed by Sina Amini 
+This software is running on a Lenovo Y500 with processor Intel core i7-3630QM running at 3.00GHz. 
+
+This program will compute e^x for two values of x.
+Vector processing will be used to compute both results concurrently.
+
+Please enter two values for exponents and press enter: -200.0 710.0
+You entered 0xc069000000000000 and 0x4086300000000000
+Enter an integer for epsilon: 444
+
+The Taylor series algorithm has begun. Please be patient. 
+
+The algorithm has completed successfully. The computed values are these. 
+exp(-200.00000000)  =  46917788083081187.000000000000000000 
+exp(710.00000000)  =  0.000000000000000000 
+
+The number of terms in the Taylor series is 796.000000
+
+The clock before the algorithm began was 7176751121984 
+The clock when the algorithm ended was 7176751391032 
+
+The run time of the algorithm alone was
+269048 tics = 89682 ns = 0.000089682 seconds.
+
+This program will now return the number of tics to the driver. Enjoy your exponents. 
+The driver received this number: 269048. Have a nice X86 day.

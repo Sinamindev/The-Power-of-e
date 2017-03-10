@@ -1,0 +1,210 @@
+
+need to know how to read time from the CPU clock and well do that now
+
+3.2 GHz = 3200,000,000 tics/second
+
+===== How to read clock =====
+
+;2 registers need to be zero
+mov rdx,0
+mov rax,0
+
+cpuid	;synchronize or make all currently executing instructions must finish
+
+rdtsc    ;copies counter to edx:eax              rdx		                        rax
+					|         | B970 FB77  |               |         | C792 14FF |
+
+		rdx
+goal = | B970 FB77 C792 14FF |   ;basically need to move everything over
+
+shl rdx, 32	;shift the values    		   rdx
+					| B970 FB77 |          |
+
+;then
+
+or rdx, rax 	;or is an actually statement, (boolian) ;;;;;you could also use "mov edx,eax" but the other method is preferred.
+
+;make sure to save the value so that you can subtract the end run time by the current run time at the end of program
+
+===== at the end of program you need to repeat some steps === =====================
+
+mov rdx,0
+mov rax,0
+
+cpuid	;synchronize or make all currently executing instructions must finish
+
+rdtsc    ;copies counter to edx:eax 
+
+
+===============================
+
+Runtime will be in tics
+
+suppose	tics = 96000
+CPU = 3.2 GHz
+How many seconds? or nanoseconds?
+
+;in seconds
+96000/3200000000 = (3*32)/(32x100000) = 3/100000 = .00003 seconds
+
+;in nanoseconds
+96000/3.2 = 960000/32 = 30000 ns = 0.000030000
+
+
+
+=============================================
++_+_+_+Today compare 2 float numbers+_+_+_+_+
+=============================================
+	integer division
+	need this in order to divide time by clockspeed
+
+=============================================================
+
+
+last time - first time = elapsed time
+
+elapsed time / clockspeed = seconds and remainder in nanoseconds
+
+
+
+elapsed time: 6 000 000 000 tics
+
+clock speed: 2 500 000 000 tics/sec = 2.5 GHz
+
+6 000 000 000 / 2 500 000 000 = 2 seconds    remainder 400 000 000 nanoseconds
+
+
+----we want to be able to program this----
+
+div = divides 2 unsigned integers <-- best choice
+idiv =  divides 2 signed integers
+
+;rdx:rax holds numerator
+mov rax, r15 	;because r15 holds time				    rdx           rax
+cqo		;convert quadnumber to octal number           |            | 6 000 000 000 |    ;cqo extends everything from rax into rdx
+mov r13, 2 500 000 000
+div r13 	;rax holds quotient, rdx remainder;
+
+--------------------------------------------
+
+runtime is 2.400 000 000  <--seconds
+    seconds^ ^^^ ^^^ ^^^nano
+
+
+timeformat db "Runtime is %ld.%09ld seconds",10,0
+
+mov rdi, timeformat
+mov rsi, rax
+mov rdx, rdx
+mov rax, 0
+call printf
+
+----- integer devision -------
+
+integer division: 	assumes rdx:rax holds numerator 
+		  	cqo helps create the numerator
+			denominator can be any r-register such as r13
+div 13
+outcome rax has quotient
+	rax has remainder
+
+
+======== following written notes=====
+======== how to get n ===============
+step 1 Input n, store in r14
+
+step 2 mov r15, 1023
+
+step 3 sub r15, r14			;r15 = 00000000...03FB   <---just an example   ,,, 3FB is just 1023-n
+    (1023-n)^
+
+step 4  shl r15, 52     ;shift to the left r15
+
+===============================================================
+
+    xmm6      
+|  x^(m) |    xmm8
+|--------| < 2^(-n)		vcomisd xmm6, xmm8
+|   m!   |
+
+ ^^^^^^^^^^^^^^^^^quad word float
+
+ja continue 	;true if xmm6 > xmm8
+jb continue	;true if xmm6 < xmm8	<---will probably need to use this one
+jae continue	;true if xmm6 >= xmm8
+
+
+"less" when referencing integers become "below" when referencing floats
+"greater" when referencing integers become "above" when referencing floats
+
+
+xmm6 = |0.00003|0.000025|
+xmm8 = | 2^(-n)| 2^(-n) |
+
+movhlpd xmm8, xmm6
+
+
+====printing in hex====
+
+hexformat db "%16lx",0
+
+;the problem is that if you want to print 00B7 4821 6314 FFFF it will remove the leading zeros, 
+
+;in order to fix this problem just add a zero in front of 16, which will give you
+
+hexformat db "%016lx",0
+
+
+;now if you want to and the designator 0x in front of the hex number
+
+hexformat db "0x%016lx",0
+
+================
+
+monthformat db "%3ld", 0 will left justify
+monthformat db "%-3ld", 0 will right justify
+
+====================
+
+echoformat db "you entered 0x%016 lx and 0x%016lx",0
+
+
+;;;for the first number 
+push qword 0
+movsd [rsp], xmm0
+pop rsi
+
+;;do again for the second
+
+;now for outputinng
+mov rax, 0
+mov rdi, echofrmat
+mov rsi, |first float number|
+mov rdx, |second float number|
+call printf
+
+========================================
+
+changing an integer to a double:
+cvtsizsd xmm5, r14
+
+==========================================
+
+After the time is in rdx
+
+push rdx onto the stack
+
+the end tim eis in rdx
+
+pop rcx which holds the start time
+
+then sub rdx, rcx just to get the difference
+
+
+===========================
+
+numerator/ denom
+
+div r14
+
+numerator in rdx plus rax
