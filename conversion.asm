@@ -38,8 +38,8 @@ segment .data                                               ;Place initialized d
 ;===== Declare some messages ==============================================================================================================================================
 
 initialmessage          db "This program will compute e^x for two values of x.", 10
-						db "Vector processing will be used to compute both results concurrently.", 10, 10, 0
-			
+                        db "Vector processing will be used to compute both results concurrently.", 10, 10, 0
+            
 promptmessage1          db "Please enter two values for exponents and press enter: ", 0
 
 echoformat              db "You entered 0x%.16lx and 0x%.16lx", 10, 0
@@ -59,26 +59,26 @@ clockbefore             db 10, "The clock before the algorithm began was %ld ", 
 clockafter              db "The clock when the algorithm ended was %ld ", 10, 0
 
 clockruntime            db 10, "The run time of the algorithm alone was", 10
-						db "%ld tics = ", 0
-			
-timeformat      db "%ld ns = 0.%09ld seconds.",10,0
+                        db "%ld tics = ", 0
+            
+timeformat              db "%ld ns = 0.%09ld seconds.",10,0
 
-goodbye         db 10, "This program will now return the number of tics to the driver. Enjoy your exponents. ", 10,0            
+goodbye                 db 10, "This program will now return the number of tics to the driver. Enjoy your exponents. ", 10,0            
 
 xsavenotsupported.notsupportedmessage db "The xsave instruction and the xrstor instruction are not supported in this microprocessor.", 10
-									  db "However, processing will continue without backing up state component data", 10, 0
+                                      db "However, processing will continue without backing up state component data", 10, 0
 
-stringformat        db "%s", 0                              ;general string format
+stringformat            db "%s", 0                          ;general string format
 
 xsavenotsupported.stringformat db "%s", 0
 
-eight_byte_format   db "%lf", 0                             ;general 8-byte float format
+eight_byte_format       db "%lf", 0                         ;general 8-byte float format
 
-integer_format      db "%ld",0                              ;general integer format
+integer_format          db "%ld",0                          ;general integer format
 
-fourfloatformat     db "%lf %lf %lf %lf", 0                 ;general four float format
+fourfloatformat         db "%lf %lf %lf %lf", 0             ;general four float format
 
-hexformat           db "0x%016lx",0
+hexformat               db "0x%016lx",0
 
 segment .bss                                                ;Place un-initialized data here.
 
@@ -133,7 +133,7 @@ cpuid
 
 ;=========== Extract bit #26 and test it ==================================================================================================================================
 and        rcx, 0x0000000004000000                          ;The mask 0x0000000004000000 has a 1 in position #26.  Now rcx is either all zeros or
-															;has a single 1 in position #26 and zeros everywhere else.
+                                                            ;has a single 1 in position #26 and zeros everywhere else.
 cmp        rcx, 0                                           ;Is (rcx == 0)?
 je         xsavenotsupported                                ;Skip the section that backs up state component data.
 
@@ -191,15 +191,15 @@ push qword 0                                                ;Set a flag (0 = fal
 startapplication: ;===== Begin the application here: Amortization Schedule ================================================================================================
 ;==========================================================================================================================================================================
 
-vzeroall                            ;place binary zeros in all components of all vector register in SSE
-push rdx                            ;push starting time onto stack
+vzeroall                                                    ;place binary zeros in all components of all vector register in SSE
+push rdx                                                    ;push starting time onto stack
 
 ;==== Show the initial message ============================================================================================================================================
 
 mov qword  rax, 0                                           ;No data from SSE will be printed
 mov        rdi, stringformat                                ;"%s"
 mov        rsi, initialmessage                              ;"This program will compute e^x for two values of x."
-															;"Vector processing will be used to compute both results concurrently."
+                                                            ;"Vector processing will be used to compute both results concurrently."
 call       printf                                           ;Call a library function to make the output
 
 ;==== Prompt for two floating point numbers ===============================================================================================================================
@@ -356,88 +356,88 @@ xrstor  [localbackuparea]                                   ;restore backed up r
 
 ;===== Output computed values for the Taylor Series =======================================================================================================================
 
-movsd xmm0,xmm15                        ;moves the first float number from xmm15 into xmm0 for output
-movsd xmm1,xmm12                        ;moves the first computed value from xmm12 into xmm1 for output
+movsd xmm0,xmm15                                            ;moves the first float number from xmm15 into xmm0 for output
+movsd xmm1,xmm12                                            ;moves the first computed value from xmm12 into xmm1 for output
 
-mov rdx, 0                          ;move 0 to prepare for backup
-mov rax, 7                          ;move 0 to prepare for backup
-xsave  [localbackuparea]                    ;backup registers to localbackuparea
+mov rdx, 0                                                  ;move 0 to prepare for backup
+mov rax, 7                                                  ;move 0 to prepare for backup
+xsave  [localbackuparea]                                    ;backup registers to localbackuparea
 
-mov rdi, taylorvalues                           ;"exp(%1.8lf)  =  %1.18lf "
-mov rax, 2                          ;prepares for 2 values to be output 
-call printf                         ;Call a library function to make the output
+mov rdi, taylorvalues                                       ;"exp(%1.8lf)  =  %1.18lf "
+mov rax, 2                                                  ;prepares for 2 values to be output 
+call printf                                                 ;Call a library function to make the output
 
-mov rdx, 0                          ;prepare to restore
-mov rax, 7                              ;machine should restore up to ymm registers
-xrstor  [localbackuparea]                       ;restore backed up registers
+mov rdx, 0                                                  ;prepare to restore
+mov rax, 7                                                  ;machine should restore up to ymm registers
+xrstor  [localbackuparea]                                   ;restore backed up registers
 
-movsd xmm0, xmm14                       ;moves the second float number from xmm14 into xmm0 for output
-movhlps xmm1, xmm12                     ;moves the second computed value from xmm12 into xmm1 for output
+movsd xmm0, xmm14                                           ;moves the second float number from xmm14 into xmm0 for output
+movhlps xmm1, xmm12                                         ;moves the second computed value from xmm12 into xmm1 for output
 
-mov rdx, 0                          ;move 0 to prepare for backup
-mov rax, 7                          ;machine supports avx registers to backup
-xsave  [localbackuparea]                    ;backup registers to localbackuparea
+mov rdx, 0                                                  ;move 0 to prepare for backup
+mov rax, 7                                                  ;machine supports avx registers to backup
+xsave  [localbackuparea]                                    ;backup registers to localbackuparea
 
-mov rdi, taylorvalues                           ;"exp(%1.8lf)  =  %1.18lf "
-mov rax, 2                          ;prepares for 2 values to be output 
-call printf                         ;Call a library function to do the hard work
+mov rdi, taylorvalues                                       ;"exp(%1.8lf)  =  %1.18lf "
+mov rax, 2                                                  ;prepares for 2 values to be output 
+call printf                                                 ;Call a library function to do the hard work
 
-mov rdx, 0                          ;prepare to restore
-mov rax, 7                              ;machine should restore up to ymm registers
-xrstor  [localbackuparea]                       ;restore backed up registers
+mov rdx, 0                                                  ;prepare to restore
+mov rax, 7                                                  ;machine should restore up to ymm registers
+xrstor  [localbackuparea]                                   ;restore backed up registers
 
 ;======= Output the number of terms into Taylor Series ====================================================================================================================
 
-movsd xmm0, xmm10                       ;moves the number of terms from xmm10 into xmm0 for output
-mov rdi, seriesterms                            ;"The number of terms in the Taylor series is %lf."
-mov rax, 1                          ;one value will be outputted to moniter
-call printf                         ;Call a library function to do the hard work
+movsd xmm0, xmm10                                           ;moves the number of terms from xmm10 into xmm0 for output
+mov rdi, seriesterms                                        ;"The number of terms in the Taylor series is %lf."
+mov rax, 1                                                  ;one value will be outputted to moniter
+call printf                                                 ;Call a library function to do the hard work
 
 ;====== read clock and show time ==========================================================================================================================================
 
-pop rcx                             ;pop starting tome off of stack and into rcx register
+pop rcx                                                     ;pop starting tome off of stack and into rcx register
 
-mov        rax, 0                       ;0 numbers will be outputted
+mov        rax, 0                                           ;0 numbers will be outputted
 mov        rsi , r13                                        ;move the starting clock value into rsi from r13 for outputting
 mov        rdi, clockbefore                                 ;"The clock before the algorithm began was  %ld  "
 call       printf                                           ;Call a library function to do the hard work
 
-mov rdx, 0                          ;set rdx register to 0
-mov rax, 0                          ;set rax register to 0
+mov rdx, 0                                                  ;set rdx register to 0
+mov rax, 0                                                  ;set rax register to 0
 
-rdtsc                               ;copies counter to edx:eax
-shl rdx, 32                         ;shift the values
+rdtsc                                                       ;copies counter to edx:eax
+shl rdx, 32                                                 ;shift the values
 
-or rdx, rax                         ;fills the values in rax to the end of the rdx register; mov rdx, rax
+or rdx, rax                                                 ;fills the values in rax to the end of the rdx register; mov rdx, rax
 
-mov r14, rdx                            ;move end time into r14
+mov r14, rdx                                                ;move end time into r14
 
-mov        rax, 0                       ;0 numbers will be outputted
+mov        rax, 0                                           ;0 numbers will be outputted
 mov        rsi ,  r14                                       ;move the end time value into rsi from r14
 mov        rdi, clockafter                                  ;"The clock when the algorithm ended was %ld  "
 call       printf                                           ;Call a library function to do the hard work
 
-sub r14, r13 ;                          ;subtract the endtime by the start time and store in rdx
+sub r14, r13 ;                                              ;subtract the endtime by the start time and store in rdx
 
-mov        rax, 0                       ;0 numbers will be outputted
+mov        rax, 0                                           ;0 numbers will be outputted
 mov        rsi , r14                                        ;move the run time value into rsi from r14
 mov        rdi, clockruntime                                ;"The run time of the algorithm alone was"
-								;"%ld tics = "
+                                                            ;"%ld tics = "
 call       printf                                           ;Call a library function to do the hard work
 
-mov rax, r14                            ;move the r14 value into the rax register
-cqo                             ;convert quadnumber to octal number 
-mov r12, 3                          ;moves 3.00 GHz speed into r12
-div r12                             ;devides r14 value by r12 and stores the value into rax and the remainder into rdx
+mov rax, r14                                                ;move the r14 value into the rax register
+cqo                                                         ;convert quadnumber to octal number 
+mov r12, 3                                                  ;moves 3.00 GHz speed into r12
+div r12                                                     ;devides r14 value by r12 and stores the value into rax and the remainder into rdx
 
 push    qword   0                                           ;Reserve 8 bytes of storage
 mov     [rsp], r14                                          ;Place a backup copy of the quotient in the reserved storage
 
-mov rdi, timeformat                     ;" %ld ns = 0.%09ld seconds."
-mov rsi, rax                            ;move the computed nanoseconds value into rsi for output
-mov rdx, rax                            ;move the computed seconds value into rdx for output
-mov rax, 0                          ;fills the rax register with the value 0
-call printf                         ;Call a library function to do the hard work
+mov rdi, timeformat                                         ;" %ld ns = 0.%09ld seconds."
+mov rsi, rax                                                ;move the computed nanoseconds value into rsi for output
+mov rdx, rax                                                ;move the computed seconds value into rdx for output
+mov rax, 0                                                  ;fills the rax register with the value 0
+call printf                                                 ;Call a library function to do the hard work
 
 ;rcx holds the start time and rdx holds the final time. make sure to out put them before you do the subtraction. 
 
@@ -515,6 +515,6 @@ pop        rbx                                              ;Restore rbx
 pop        rbp                                              ;Restore rbp
 
 ret                                                         ;No parameter with this instruction.  This instruction will pop 8 bytes from
-															;the integer stack, and jump to the address found on the stack.
+                                                            ;the integer stack, and jump to the address found on the stack.
 ;========== End of program conversion.asm =======================================================================================================================
 ;========1=========2=========3=========4=========5=========6=========7=========8=========9=========0=========1=========2=========3=========4=========5=========6=========7**
